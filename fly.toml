@@ -21,9 +21,9 @@ primary_region = 'ams'
   NODE_ENV = 'production'
   WEBHOOK_URL = 'https://wouters-n8n.fly.dev/'
 
-[[mounts]]
-  source = 'n8n_vol'
-  destination = '/home/node/.n8n'
+[mounts]
+  source = "n8n_vol"
+  destination = "/home/node/.n8n"
 
 [http_service]
   internal_port = 80
