@@ -24,6 +24,7 @@ primary_region = 'ams'
 [mounts]
   source = "n8n_vol"
   destination = "/home/node/.n8n"
+  processes = ["app"]
 
 [http_service]
   internal_port = 8080
