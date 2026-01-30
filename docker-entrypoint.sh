@@ -8,23 +8,14 @@ if [ -d /opt/custom-certificates ]; then
   c_rehash /opt/custom-certificates
 fi
 
-# Install custom nodes if present
-# if [ -f "/home/node/n8n-custom-0.1.0.tgz" ]; then
-#   echo "Installing custom nodes..."
-#   cd /home/node/.n8n
-#   npm install /home/node/n8n-custom-0.1.0.tgz
-# fi
-
-# Ensure proper permissions for n8n directory
+# Fly volumes can mount as root-owned. This keeps behavior compatible either way.
 if [ -d "/home/node/.n8n" ]; then
-  chmod -R 755 /home/node/.n8n
+  chmod -R 755 /home/node/.n8n || true
 fi
 
-# Start n8n
+# Start n8n (same behavior as your old entrypoint)
 if [ "$#" -gt 0 ]; then
-  # Got started with arguments
   exec n8n "$@"
 else
-  # Got started without arguments
   exec n8n start
 fi
