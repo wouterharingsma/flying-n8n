@@ -59,6 +59,7 @@ The deploy script will:
 ./deploy.sh              # Full deployment
 ./deploy.sh setup        # Configure without deploying
 ./deploy.sh secrets      # Update URL configuration
+./deploy.sh autosleep    # Toggle auto-sleep on/off
 ./deploy.sh status       # Check app status
 ./deploy.sh logs         # Stream live logs
 ./deploy.sh ssh          # SSH into container
@@ -96,6 +97,24 @@ Edit `fly.toml` to customize:
 | `EXECUTIONS_DATA_PRUNE` | `true` | Auto-delete old execution data |
 | `EXECUTIONS_DATA_MAX_AGE` | `48` | Hours to keep execution data |
 | `EXECUTIONS_DATA_PRUNE_MAX_COUNT` | `1000` | Max executions to retain |
+
+### Auto-Sleep
+
+By default, auto-sleep is enabled to save costs. The app will sleep when idle and wake up on incoming requests (~5s cold start).
+
+```bash
+# Toggle auto-sleep
+./deploy.sh autosleep
+
+# Or manually edit fly.toml:
+# auto_stop_machines = 'stop'   → enabled (sleeps when idle)
+# auto_stop_machines = false    → disabled (always running)
+```
+
+| Mode | Behavior | Cost |
+|------|----------|------|
+| Auto-sleep ON | Sleeps after ~5min idle, ~5s wake | Lower |
+| Auto-sleep OFF | Always running 24/7 | Higher |
 
 ### Resources
 
