@@ -45,7 +45,7 @@ RUN python3 -m venv /home/node/python/venv
 ENV PATH="/home/node/python/venv/bin:$PATH"
 
 # Copy Python files and requirements
-COPY python/ /home/node/python/
+# COPY python/ /home/node/python/
 COPY requirements.txt /home/node/python/
 
 # Set proper permissions after copying
@@ -84,7 +84,7 @@ RUN npm install jsonwebtoken
 ENV N8N_RUNNERS_MODE=internal_launcher \
     N8N_RUNNERS_LAUNCHER_PATH=/usr/local/bin/task-runner-launcher
 COPY n8n-task-runners.json /etc/n8n-task-runners.json
-COPY plasmic.md /home/node/python/
+# COPY plasmic.md /home/node/python/
 
 # Expose both n8n and Python API ports
 EXPOSE 5678 8000
